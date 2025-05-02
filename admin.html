@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Panel</h1>
+    </header>
+    <main>
+        <section id="admin-dashboard">
+            <h2>Pending Issues</h2>
+            <ul id="ticket-list"></ul>
+        </section>
+    </main>
+    <script>
+        const ticketList = document.getElementById("ticket-list");
+        let tickets = JSON.parse(localStorage.getItem("tickets")) || [];
+
+        function renderTickets() {
+            ticketList.innerHTML = "";
+            tickets.forEach((ticket) => {
+                const li = document.createElement("li");
+                li.textContent = `${ticket.issue} (Priority: ${ticket.priority})`;
+
+                // Add priority-based coloring
+                if (ticket.priority === "Low") li.style.color = "green";
+                else if (ticket.priority === "High") li.style.color = "orange";
+                else if (ticket.priority === "Very High") li.style.color = "red";
+
+                const resolveButton = document.createElement("button");
+                resolveButton.textContent = "Resolve";
+                resolveButton.addEventListener("click", () => resolveTicket(ticket.id));
+
+                li.appendChild(resolveButton);
+                ticketList.appendChild(li);
+            });
+        }
+
+        function resolveTicket(ticketId) {
+            tickets = tickets.filter((ticket) => ticket.id !== ticketId);
+            localStorage.setItem("tickets", JSON.stringify(tickets)); // Update localStorage
+            alert("Ticket resolved!");
+            renderTickets();
+        }
+
+        renderTickets();
+    </script>
+</body>
+</html>

@@ -1,1 +1,51 @@
-test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Ticketing System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Office Ticketing System</h1>
+    </header>
+    <main>
+        <section id="employee-section">
+            <h2>Submit an Issue</h2>
+            <form id="ticket-form">
+                <label for="issue">Issue Description:</label>
+                <textarea id="issue" name="issue" required></textarea>
+
+                <label for="priority">Priority:</label>
+                <select id="priority" name="priority" required>
+                    <option value="Low">Low</option>
+                    <option value="High">High</option>
+                    <option value="Very High">Very High</option>
+                </select>
+
+                <button type="submit">Generate Token</button>
+            </form>
+        </section>
+
+        <section id="admin-section">
+            <h2>Admin Panel</h2>
+            <form id="admin-login-form">
+                <label for="admin-id">Admin ID:</label>
+                <input type="text" id="admin-id" name="admin-id" required>
+
+                <label for="admin-password">Password:</label>
+                <input type="password" id="admin-password" name="admin-password" required>
+
+                <button type="submit">Login</button>
+            </form>
+
+            <div id="admin-dashboard" style="display: none;">
+                <h3>Pending Issues</h3>
+                <ul id="ticket-list"></ul>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
