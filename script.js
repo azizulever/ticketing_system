@@ -37,23 +37,43 @@ adminLoginForm.addEventListener("submit", (e) => {
 // Render tickets in admin dashboard
 function renderTickets() {
     ticketList.innerHTML = "";
+    
+    if (tickets.length === 0) {
+        const noTickets = document.createElement("div");
+        noTickets.className = "no-tickets-message";
+        noTickets.textContent = "No pending issues at the moment.";
+        ticketList.appendChild(noTickets);
+        return;
+    }
+    
     tickets.forEach((ticket) => {
         const li = document.createElement("li");
-        li.textContent = `${ticket.issue} (Priority: ${ticket.priority})`;
-
-        // Apply priority-based coloring
-        if (ticket.priority === "High") {
-            li.style.color = "red";
-        } else if (ticket.priority === "Medium") {
-            li.style.color = "orange";
-        } else {
-            li.style.color = "green";
+        li.setAttribute('data-priority', ticket.priority);
+        
+        const contentDiv = document.createElement("div");
+        contentDiv.className = "ticket-content";
+        contentDiv.textContent = ticket.issue;
+        
+        const priorityTag = document.createElement("span");
+        priorityTag.textContent = ticket.priority;
+        priorityTag.className = "priority-tag";
+        
+        // Add specific class based on priority
+        if (ticket.priority === "Low") {
+            priorityTag.classList.add("low");
+        } else if (ticket.priority === "High") {
+            priorityTag.classList.add("high");
+        } else if (ticket.priority === "Very High") {
+            priorityTag.classList.add("very-high");
         }
-
+        
+        contentDiv.appendChild(priorityTag);
+        
         const resolveButton = document.createElement("button");
         resolveButton.textContent = "Resolve";
         resolveButton.addEventListener("click", () => resolveTicket(ticket.id));
 
+        li.appendChild(contentDiv);
         li.appendChild(resolveButton);
         ticketList.appendChild(li);
     });
