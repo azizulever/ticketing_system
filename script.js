@@ -17,7 +17,7 @@ ticketForm.addEventListener("submit", (e) => {
 
     alert("Ticket generated successfully!");
     ticketForm.reset();
-    localStorage.setItem("tickets", JSON.stringify(tickets)); // Save tickets to localStorage
+    localStorage.setItem("tickets", JSON.stringify(tickets));
 });
 
 // Handle admin login
