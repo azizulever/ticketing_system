@@ -79,7 +79,7 @@ function renderTickets() {
     });
 }
 
-// Resolve a ticket
+// Resolve ticket
 function resolveTicket(ticketId) {
     tickets = tickets.filter((ticket) => ticket.id !== ticketId);
     alert("Ticket resolved!");
