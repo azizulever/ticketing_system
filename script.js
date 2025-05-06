@@ -6,7 +6,6 @@ const ticketList = document.getElementById("ticket-list");
 
 let tickets = [];
 
-// Handle ticket submission
 ticketForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const issue = document.getElementById("issue").value;
